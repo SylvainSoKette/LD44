@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
     public float speed = 2f;
-
-    public float[] shotSpread = new float[] {-1.0f, 1.0f};
-
+    
     bool canMove = true;
 
-    public Rigidbody bullet;
+    public GameObject canon;
 
-    public float shootSpeed = 5f;
+    public Bullet bullet;
 
-    public float shootRate = 0.25f;
-    float lastShot = .3f;
+    public float shootRate = 100;
+
+    public float bulletVelocity = 35;
+
+    float nextShotTime;
 
     void Update()
     {
@@ -26,7 +28,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Move()
+    public void Move()
     {
         // Player Move
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -46,22 +48,20 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    void Shoot()
+    public void Shoot()
     {
         if (Input.GetMouseButton(0))
         {
-            if (Time.time > shootRate + lastShot)
+            if (Time.time > nextShotTime)
             {
-                Rigidbody instantiateProjectile = Instantiate(
-                    bullet,
-                    bullet.transform.position,
-                    this.transform.rotation
-                ) as Rigidbody;
+                nextShotTime = Time.time + shootRate / 1000;
 
-
-                instantiateProjectile.velocity = this.transform.TransformDirection(new Vector3(Random.Range(shotSpread[0], shotSpread[1]), shootSpeed, 0));
-
-                lastShot = Time.time;
+                Bullet newBullet = Instantiate(bullet, canon.transform.position, canon.transform.rotation) as Bullet;
+                newBullet.SetSpeed(bulletVelocity);
+                // newBullet.velocity = this.transform.TransformDirection(new Vector3(
+                //     Random.Range(shotSpread[0], 
+                //     shotSpread[1]),
+                //     bulletVelocity, 0));
             }
         }
     }
