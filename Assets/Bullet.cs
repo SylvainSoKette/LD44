@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // public LayerMask collisionMask;
+    public LayerMask collisionMask;
     float speed = 10f;
 
     // public float[] shotSpread = new float[] { -1.0f, 1.0f };
@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         float moveDistance = speed * Time.deltaTime;
-        // CheckCollisions(moveDistance);
+        CheckCollisions(moveDistance);
         this.transform.Translate(Vector3.up * moveDistance);
     }
     
@@ -21,20 +21,19 @@ public class Bullet : MonoBehaviour
         speed = newSpeed;
     }
 
-    // void CheckCollisions(float moveDistance)
-    // {
-    //     Ray ray = new Ray(this.transform.position, this.transform.forward);
-    //     RaycastHit hit;
+    void CheckCollisions(float moveDistance)
+    {
+        Ray ray = new Ray(this.transform.position, this.transform.up);
+        RaycastHit hit;
 
-    //     if (Physics.Raycast(ray, out hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide)) {
-    //         OnHitObject(hit);
-    //     }
-    // }
+        if (Physics.Raycast(ray, out hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide)) {
+            OnHitObject(hit);
+        }
+    }
 
-    // void OnHitObject(RaycastHit hit)
-    // {
-    //     print("Hit !");
-    //     print(hit.collider.gameObject.name);
-    //     // GameObject.Destroy(gameObject);
-    // }
+    void OnHitObject(RaycastHit hit)
+    {
+        GameObject.Destroy(hit.collider.gameObject);
+        GameObject.Destroy(gameObject);
+    }
 }

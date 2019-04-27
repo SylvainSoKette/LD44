@@ -121,6 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebf7332f2bcb2043a0d0827226bf6dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotSpread:
-  - -0.1
-  - 0.1
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
