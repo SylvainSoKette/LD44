@@ -6,14 +6,24 @@ public class Player : MonoBehaviour
 {
     public float speed = 2f;
 
-    void Start()
-    {
-        
-    }
+    public float[] shotSpread = new float[] {-1.0f, 1.0f};
+
+    bool canMove = true;
+
+    public Rigidbody bullet;
+
+    public float shootSpeed = 5f;
+
+    public float shootRate = 0.25f;
+    float lastShot = .3f;
 
     void Update()
     {
-        Move();
+        if (CanMove())
+        {
+            Move();
+            Shoot();
+        }
     }
 
     void Move()
@@ -34,5 +44,35 @@ public class Player : MonoBehaviour
         var mousePos = Input.mousePosition - Camera.main.WorldToScreenPoint(this.transform.position);
         var angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg + 270;
         this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    void Shoot()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            if (Time.time > shootRate + lastShot)
+            {
+                Rigidbody instantiateProjectile = Instantiate(
+                    bullet,
+                    bullet.transform.position,
+                    this.transform.rotation
+                ) as Rigidbody;
+
+
+                instantiateProjectile.velocity = this.transform.TransformDirection(new Vector3(Random.Range(shotSpread[0], shotSpread[1]), shootSpeed, 0));
+
+                lastShot = Time.time;
+            }
+        }
+    }
+
+    void SetAllowToMove(bool allow)
+    {
+        canMove = allow;
+    }
+
+    bool CanMove()
+    {
+        return canMove;
     }
 }
