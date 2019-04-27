@@ -51,7 +51,7 @@ public class PopUpWindowManager : MonoBehaviour
         }
     }
 
-    void OnClickPopUpWindow(bool accept)
+    void ClickPopUpWindow(bool accept)
     {
         this.currentPopUpWindow.SetActive(false);
         if (accept)
@@ -64,15 +64,15 @@ public class PopUpWindowManager : MonoBehaviour
         }
     }
 
-    public void ClickButton(string name)
+    public void OnClickButton(string name)
     {
         switch(name)
         {
             case "AcceptButton":
-                OnClickPopUpWindow(true);
+                ClickPopUpWindow(true);
                 break;
             case "RefuseButton":
-                OnClickPopUpWindow(false);
+                ClickPopUpWindow(false);
                 break;
         }
 

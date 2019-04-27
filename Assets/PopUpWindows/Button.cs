@@ -28,7 +28,7 @@ public class Button : MonoBehaviour
         this.GetComponent<MeshRenderer>().material.color = hoverColor;
         if (Input.GetMouseButtonDown((int)mouseButton.PRIMARY))
         {
-            this.popUpWindowManagerScript.ClickButton(this.name);
+            this.popUpWindowManagerScript.OnClickButton(this.name);
         }
     }
 

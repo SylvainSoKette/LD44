@@ -447,5 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  bullet: {fileID: 0}
-  shootSpeed: 1
+  canon: {fileID: 591776869}
+  bullet: {fileID: -1944712913314341858, guid: 2b9330d99c7e95a45bbf217f689484ee, type: 3}
+  shootRate: 100
+  bulletVelocity: 35
