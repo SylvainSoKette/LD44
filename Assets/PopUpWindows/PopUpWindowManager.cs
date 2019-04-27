@@ -7,7 +7,7 @@ public class PopUpWindowManager : MonoBehaviour
     public GameObject popUpWindow;
 
     GameObject currentPopUpWindow;
-
+    Color initialButtonColor;
     Ray mouseRay;
     RaycastHit mouseHit;
 
@@ -26,14 +26,19 @@ public class PopUpWindowManager : MonoBehaviour
         }
 
         // REAL GAME STUFF
-        if (this.currentPopUpWindow != null && Input.GetMouseButtonDown((int)mouseButton.PRIMARY))
-        {
-            mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(mouseRay, out mouseHit))
-            {
-                onClickButton(mouseHit.collider.name);
-            }
-        }
+        // mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // if(Physics.Raycast(mouseRay, out mouseHit))
+        // {
+        //     onHoverButton(mouseHit.collider.gameObject);
+        //     if (this.currentPopUpWindow != null && Input.GetMouseButtonDown((int)mouseButton.PRIMARY))
+        //     {
+        //         onClickButton(mouseHit.collider.gameObject);
+        //     }
+        // }
+        // else
+        // {
+        //     onNotHoverButton(mouseHit.collider.gameObject);
+        // }
     }
 
     void ResetPopUpWindow()
@@ -55,9 +60,21 @@ public class PopUpWindowManager : MonoBehaviour
         }
     }
 
-    void onClickButton(string buttonName)
+    // void onHoverButton(GameObject button)
+    // {
+    //     Material buttonMaterial = button.GetComponent<MeshRenderer>().material;
+    //     initialButtonColor = buttonMaterial.color;
+    //     buttonMaterial.color = Color.gray;
+    // }
+
+    // void onNotHoverButton(GameObject button)
+    // {
+    //     button.GetComponent<MeshRenderer>().material.color = initialButtonColor;
+    // }
+
+    void onClickButton(GameObject button)
     {
-        switch(buttonName)
+        switch(button.name)
         {
             case "AcceptButton":
                 ClickPopUpWindow(true);

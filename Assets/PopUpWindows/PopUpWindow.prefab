@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3096108256780712545}
   - component: {fileID: 3096108256780712544}
   - component: {fileID: 3096108256780712547}
+  - component: {fileID: 4709886512337681980}
   m_Layer: 0
   m_Name: AcceptButton
   m_TagString: Untagged
@@ -121,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096108256780712573}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.235, y: -0.384, z: -2}
+  m_LocalPosition: {x: 0.28, y: -0.42, z: -2}
   m_LocalScale: {x: 0.125, y: 0.09002223, z: 1}
   m_Children: []
   m_Father: {fileID: 3096108255852888960}
@@ -152,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 87c404b7ae5f3554496bbc851a4b0954, type: 2}
+  - {fileID: 2100000, guid: cadde317dc3c67247ac0ac119014ba2a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -186,6 +187,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4709886512337681980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096108256780712573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6db7a5179ea8b641b1cb691daf20697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0.19191593, g: 0.6981132, b: 0.08891065, a: 0}
 --- !u!1 &3096108257763268383
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +212,7 @@ GameObject:
   - component: {fileID: 3096108257763268355}
   - component: {fileID: 3096108257763268354}
   - component: {fileID: 3096108257763268381}
+  - component: {fileID: 6457167779901422788}
   m_Layer: 0
   m_Name: RefuseButton
   m_TagString: Untagged
@@ -213,7 +228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096108257763268383}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.388, y: -0.384, z: -2}
+  m_LocalPosition: {x: 0.42, y: -0.42, z: -2}
   m_LocalScale: {x: 0.125, y: 0.09002223, z: 1}
   m_Children: []
   m_Father: {fileID: 3096108255852888960}
@@ -278,3 +293,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6457167779901422788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096108257763268383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6db7a5179ea8b641b1cb691daf20697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 0}
