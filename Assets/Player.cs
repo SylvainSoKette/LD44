@@ -66,12 +66,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    void SetAllowToMove(bool allow)
+    public void SetAllowToMove(bool allow)
     {
         canMove = allow;
     }
 
-    bool CanMove()
+    public bool CanMove()
     {
         return canMove;
     }

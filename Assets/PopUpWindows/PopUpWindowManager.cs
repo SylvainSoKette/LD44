@@ -7,42 +7,33 @@ public class PopUpWindowManager : MonoBehaviour
     public GameObject popUpWindow;
 
     GameObject currentPopUpWindow;
-    Color initialButtonColor;
-    Ray mouseRay;
-    RaycastHit mouseHit;
+    
+    GameObject player;
+    Player playerScript;
 
-    enum mouseButton : int {
-        PRIMARY=0,
-        SECONDARY=1,
-        MIDDLE=2
+    void Start()
+    {
+        player = GameObject.Find("Player");
+        playerScript = player.GetComponent<Player>();
     }
 
     void Update()
     {
         // DEBUG STUFF
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            ResetPopUpWindow();
+            SpawnPopUpWindow();
         }
 
         // REAL GAME STUFF
-        // mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // if(Physics.Raycast(mouseRay, out mouseHit))
-        // {
-        //     onHoverButton(mouseHit.collider.gameObject);
-        //     if (this.currentPopUpWindow != null && Input.GetMouseButtonDown((int)mouseButton.PRIMARY))
-        //     {
-        //         onClickButton(mouseHit.collider.gameObject);
-        //     }
-        // }
-        // else
-        // {
-        //     onNotHoverButton(mouseHit.collider.gameObject);
-        // }
+        
     }
 
-    void ResetPopUpWindow()
+    void SpawnPopUpWindow()
     {
+        // No, player can't move ! :D
+        playerScript.SetAllowToMove(false);
+
         float randomX = Random.Range(-1.0f, 1.0f);
         float randomY = Random.Range(-1.0f, 1.0f);
         if (currentPopUpWindow == null)
@@ -60,33 +51,32 @@ public class PopUpWindowManager : MonoBehaviour
         }
     }
 
-    // void onHoverButton(GameObject button)
-    // {
-    //     Material buttonMaterial = button.GetComponent<MeshRenderer>().material;
-    //     initialButtonColor = buttonMaterial.color;
-    //     buttonMaterial.color = Color.gray;
-    // }
-
-    // void onNotHoverButton(GameObject button)
-    // {
-    //     button.GetComponent<MeshRenderer>().material.color = initialButtonColor;
-    // }
-
-    void onClickButton(GameObject button)
+    void OnClickPopUpWindow(bool accept)
     {
-        switch(button.name)
+        this.currentPopUpWindow.SetActive(false);
+        if (accept)
         {
-            case "AcceptButton":
-                ClickPopUpWindow(true);
-                break;
-            case "RefuseButton":
-                ClickPopUpWindow(false);
-                break;
+            print("Hhinhinhinhnihnihnihin");
+        }
+        else
+        {
+            print("sad :(");
         }
     }
 
-    void ClickPopUpWindow(bool accept)
+    public void ClickButton(string name)
     {
-        this.currentPopUpWindow.SetActive(false);
+        switch(name)
+        {
+            case "AcceptButton":
+                OnClickPopUpWindow(true);
+                break;
+            case "RefuseButton":
+                OnClickPopUpWindow(false);
+                break;
+        }
+
+        // Player is free to move again !
+        playerScript.SetAllowToMove(true);
     }
 }
