@@ -6,6 +6,8 @@ public class PopUpWindowManager : MonoBehaviour
 {
     public GameObject popUpWindow;
     public float popUpWindowJutter = 4.0f;
+    public float minPopUpInterval = 3f;
+    public float maxPopUpInterval = 10f;
 
     GameObject currentPopUpWindow;
     
@@ -25,12 +27,16 @@ public class PopUpWindowManager : MonoBehaviour
 
     }
 
+    float getRandomSpawnInterval()
+    {
+        return Random.Range(minPopUpInterval, maxPopUpInterval);
+    }
+
     IEnumerator SpawnPopUpWindow()
     {
-        float spawnRate = Random.Range(5f, 15f);
-
         while (true) {
             // No, player can't move ! :D
+            float spawnRate = getRandomSpawnInterval();
             playerScript.SetAllowToMove(false);
 
             if (currentPopUpWindow == null)
