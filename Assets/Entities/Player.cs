@@ -24,25 +24,36 @@ public class Player : MonoBehaviour
         if (CanMove())
         {
             Move();
+            Aim();
             Shoot();
         }
     }
 
     public void Move()
     {
-        // Player Move
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, vertical, 0).normalized;
         Vector3 movement = new Vector3(direction.x * Time.deltaTime * speed, direction.y * Time.deltaTime * speed, 0);
+        
+        float newX = this.transform.position.x + movement.x;
+        float newY = this.transform.position.y + movement.y;
+
+        float mapSize = 128f;
+        if (newX > mapSize) newX = mapSize;
+        if (newX < -mapSize) newX = -mapSize;
+        if (newY > mapSize) newY = mapSize;
+        if (newY < -mapSize) newY = -mapSize;
+
         this.transform.position = new Vector3(
-            this.transform.position.x + movement.x,
-            this.transform.position.y + movement.y,
+            newX,
+            newY,
             0
         );
+    }
 
-
-        // Player aim
+    public void Aim()
+    {
         var mousePos = Input.mousePosition - Camera.main.WorldToScreenPoint(this.transform.position);
         var angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg + 270;
         this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
