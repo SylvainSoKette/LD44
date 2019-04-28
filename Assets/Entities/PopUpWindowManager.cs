@@ -56,7 +56,7 @@ public class PopUpWindowManager : MonoBehaviour
         return new Vector3(
             player.transform.position.x + randomX,
             player.transform.position.y + randomY,
-            -1
+            -2
         );
     }
 
