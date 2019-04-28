@@ -5,12 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public LayerMask collisionMask;
-    float speed = 10f;
+    public float speed = 10f;
+    public float maxLifeTime = 1.0f;
 
     // public float[] shotSpread = new float[] { -1.0f, 1.0f };
 
     void Update()
     {
+        Destroy(this.gameObject, this.maxLifeTime);
         float moveDistance = speed * Time.deltaTime;
         CheckCollisions(moveDistance);
         this.transform.Translate(Vector3.up * moveDistance);
