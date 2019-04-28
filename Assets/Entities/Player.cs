@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,14 @@ public class Player : MonoBehaviour
     public float bulletVelocity = 35;
 
     float nextShotTime;
+
+    public Text countText;
+    int thune = 666;
+
+    private void Start() 
+    {
+        countText.text = "Money: " + thune.ToString();
+    }
 
     void Update()
     {
