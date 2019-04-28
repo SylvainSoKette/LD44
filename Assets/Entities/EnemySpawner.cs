@@ -47,8 +47,6 @@ public class EnemySpawner : MonoBehaviour
                     this.player.transform.position.y + spawnDirection.y * this.spawnDistance,
                     0
                 );
-                print("Player :" + this.player.transform.position.x + " " + this.player.transform.position.y);
-                print("spawnPosition :" + spawnPosition.x + " " + spawnPosition.y);
 
                 Enemy newEnemy = Instantiate(
                     enemy,
