@@ -36,7 +36,11 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, vertical, 0).normalized;
-        Vector3 movement = new Vector3(direction.x * Time.deltaTime * speed, direction.y * Time.deltaTime * speed, 0);
+        Vector3 movement = new Vector3(
+            direction.x * Time.deltaTime * this.getSpeed(),
+            direction.y * Time.deltaTime * this.getSpeed(),
+            0
+        );
         
         float newX = this.transform.position.x + movement.x;
         float newY = this.transform.position.y + movement.y;
@@ -63,7 +67,7 @@ public class Player : MonoBehaviour
 
     public void Shoot()
     {
-        if (Input.GetMouseButton(0))
+        if (this.isShooting())
         {
             if (Time.time > nextShotTime)
             {
@@ -77,6 +81,21 @@ public class Player : MonoBehaviour
                 //     bulletVelocity, 0));
             }
         }
+    }
+
+    private bool isShooting()
+    {
+        return Input.GetMouseButton(0);
+    }
+
+    public float getSpeed()
+    {
+        float speed = this.speed;
+        if (this.isShooting())
+        {
+            speed /= 2;
+        }
+        return speed;
     }
 
     public int getThune()
