@@ -5,25 +5,50 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    Player player;
-    Text thuneText;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private Player player;
+    [SerializeField] private Text thuneText;
 
-    // Start is called before the first frame update
     void Start()
     {
-        this.thuneText = this.GetComponentInChildren<Text>();
-        this.player = GameObject.Find("Player").GetComponent<Player>();
+        pauseMenu.SetActive(false);
+
         UpdateThune();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateThune();
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu.activeInHierarchy)
+            {
+                ContinueGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        } 
     }
 
     void UpdateThune()
     {
-        this.thuneText.text =  this.player.getThune().ToString() + "$$";
+        this.thuneText.text =  this.player.getThune().ToString() + "€$";
+    }
+
+    private void PauseGame()
+    {
+        print("PauseGame");
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+    } 
+
+    private void ContinueGame()
+    {
+        print("ContinueGame");
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
     }
 }
