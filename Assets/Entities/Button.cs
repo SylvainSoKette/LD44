@@ -7,8 +7,7 @@ public class Button : MonoBehaviour
     public Color hoverColor;
 
     Color initColor;
-    GameObject popUpWindowManager;
-    PopUpWindowManager popUpWindowManagerScript;
+    PopUpWindowManager popUpWindowManager;
 
     enum mouseButton : int {
         PRIMARY=0,
@@ -19,8 +18,7 @@ public class Button : MonoBehaviour
     void Start()
     {
         this.initColor = this.GetComponent<MeshRenderer>().material.color;
-        this.popUpWindowManager = GameObject.Find("PopUpWindowManager");
-        this.popUpWindowManagerScript = this.popUpWindowManager.GetComponent<PopUpWindowManager>();
+        this.popUpWindowManager = GameObject.Find("Map").GetComponent<PopUpWindowManager>();
     }
 
     void OnMouseOver()
@@ -28,7 +26,7 @@ public class Button : MonoBehaviour
         this.GetComponent<MeshRenderer>().material.color = hoverColor;
         if (Input.GetMouseButtonDown((int)mouseButton.PRIMARY))
         {
-            this.popUpWindowManagerScript.OnClickButton(this.name);
+            this.popUpWindowManager.OnClickButton(this.name);
         }
     }
 

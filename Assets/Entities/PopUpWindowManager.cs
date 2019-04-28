@@ -5,6 +5,7 @@ using UnityEngine;
 public class PopUpWindowManager : MonoBehaviour
 {
     public GameObject popUpWindow;
+    public float popUpWindowJutter = 4.0f;
 
     GameObject currentPopUpWindow;
     
@@ -15,44 +16,44 @@ public class PopUpWindowManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<Player>();
+
+        StartCoroutine(SpawnPopUpWindow());
     }
 
     void Update()
     {
-        // DEBUG STUFF
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SpawnPopUpWindow();
-        }
 
-        // REAL GAME STUFF
-        
     }
 
-    void SpawnPopUpWindow()
+    IEnumerator SpawnPopUpWindow()
     {
-        // No, player can't move ! :D
-        playerScript.SetAllowToMove(false);
+        float spawnRate = Random.Range(5f, 15f);
 
-        if (currentPopUpWindow == null)
-        {
-            this.currentPopUpWindow = Instantiate(
-                popUpWindow,
-                PlaceMeUpScotty(),
-                Quaternion.identity
-            );
-        }
-        else
-        {
-            this.currentPopUpWindow.transform.position = PlaceMeUpScotty();
-            this.currentPopUpWindow.SetActive(true);
+        while (true) {
+            // No, player can't move ! :D
+            playerScript.SetAllowToMove(false);
+
+            if (currentPopUpWindow == null)
+            {
+                this.currentPopUpWindow = Instantiate(
+                    popUpWindow,
+                    PlaceMeUpScotty(),
+                    Quaternion.identity
+                );
+            }
+            else
+            {
+                this.currentPopUpWindow.transform.position = PlaceMeUpScotty();
+                this.currentPopUpWindow.SetActive(true);
+            }
+            yield return new WaitForSeconds(spawnRate);
         }
     }
 
     Vector3 PlaceMeUpScotty()
     {
-        float randomX = Random.Range(-1.0f, 1.0f);
-        float randomY = Random.Range(-1.0f, 1.0f);
+        float randomX = Random.Range(-popUpWindowJutter, popUpWindowJutter);
+        float randomY = Random.Range(-popUpWindowJutter, popUpWindowJutter);
         return new Vector3(
             player.transform.position.x + randomX,
             player.transform.position.y + randomY,
