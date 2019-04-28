@@ -5,12 +5,25 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 0.5f;
+    public float life = 20f;
 
     private GameObject player;
 
-    private void Update()
+    private Renderer enemySkin;
+
+    private void Start() 
     {
+        enemySkin = GetComponent<Renderer>();
+    }
+
+    private void Update() {
         MoveToPlayer();
+    }
+
+    public void Initiate()
+    {
+        this.player = GameObject.Find("Player");
+        this.speed = Random.Range(2.0f, 4.0f);
     }
 
     private void MoveToPlayer()
@@ -30,9 +43,24 @@ public class Enemy : MonoBehaviour
         );
     }
 
-    public void Initiate()
+    public float getLife()
     {
-        this.player = GameObject.Find("Player");
-        this.speed = Random.Range(2.0f, 4.0f);
+        return life;
+    }
+
+    public void takeDamage(float damage)
+    {
+        Color actualColor = enemySkin.material.color;
+
+        enemySkin.material.color = Color.red;
+
+        life -= damage;
+
+        if (life <= 0)
+        {
+            GameObject.Destroy(gameObject);
+        }
+
+        enemySkin.material.color = actualColor;
     }
 }

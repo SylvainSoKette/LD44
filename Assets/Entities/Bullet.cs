@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public float maxLifeTime = 1.0f;
 
+    public float damage = 3;
+
     // public float[] shotSpread = new float[] { -1.0f, 1.0f };
 
     void Update()
@@ -35,7 +37,11 @@ public class Bullet : MonoBehaviour
 
     void OnHitObject(RaycastHit hit)
     {
-        GameObject.Destroy(hit.collider.gameObject);
+        // Do damage to the enemy
+        Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+        enemy.takeDamage(damage);
+        
+        // Destroy the bullet
         GameObject.Destroy(gameObject);
     }
 }
