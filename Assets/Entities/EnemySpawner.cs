@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public int maxEnemy = 5;
-
     public Enemy enemy;
 
-    public float spawnInterval = 500;
-    private float nextSpawnTime;
+    public float spawnDistance = 1f;
+    public float spawnInterval = 1f;
+    float nextSpawnTime;
 
-    private GameObject player;
+    GameObject player;
 
     private void Start() 
     {
@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        SpawnEnemy(GetNumberOfEnemy());
+        SpawnEnemies();
     }
 
     private int GetNumberOfEnemy()
@@ -28,16 +28,34 @@ public class EnemySpawner : MonoBehaviour
         return GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
 
-    private void SpawnEnemy(int actualNumberOfEnemy)
+    private void SpawnEnemies()
     {
-        if (actualNumberOfEnemy <= maxEnemy)
+        if (GetNumberOfEnemy() <= maxEnemy)
         {
             if (Time.time > nextSpawnTime)
             {
                 nextSpawnTime = Time.time + spawnInterval;
 
-                Enemy newEnemy = Instantiate(enemy, this.transform.position, this.transform.rotation) as Enemy;
-                newEnemy.player = player;
+                Vector3 spawnDirection = new Vector3(
+                    Random.Range(-1f, 1f),
+                    Random.Range(-1f, 1f),
+                    0
+                ).normalized;
+
+                Vector3 spawnPosition = new Vector3(
+                    this.player.transform.position.x + spawnDirection.x * this.spawnDistance,
+                    this.player.transform.position.y + spawnDirection.y * this.spawnDistance,
+                    0
+                );
+                print("Player :" + this.player.transform.position.x + " " + this.player.transform.position.y);
+                print("spawnPosition :" + spawnPosition.x + " " + spawnPosition.y);
+
+                Enemy newEnemy = Instantiate(
+                    enemy,
+                    spawnPosition,
+                    Quaternion.identity
+                ) as Enemy;
+                newEnemy.Initiate();
             }
         }
     }

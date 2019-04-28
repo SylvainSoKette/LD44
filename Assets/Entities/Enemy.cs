@@ -6,17 +6,18 @@ public class Enemy : MonoBehaviour
 {
     public float speed = 0.5f;
 
-    public GameObject player;
+    private GameObject player;
 
-    private void Update() {
+    private void Update()
+    {
         MoveToPlayer();
     }
 
     private void MoveToPlayer()
     {
         Vector3 direction = new Vector3(
-            player.transform.position.x - this.transform.position.x,
-            player.transform.position.y - this.transform.position.y,
+            this.player.transform.position.x - this.transform.position.x,
+            this.player.transform.position.y - this.transform.position.y,
             -0.5f
         ).normalized;
 
@@ -27,5 +28,11 @@ public class Enemy : MonoBehaviour
             this.transform.position.y + movement.y,
             -0.5f
         );
+    }
+
+    public void Initiate()
+    {
+        this.player = GameObject.Find("Player");
+        this.speed = Random.Range(2.0f, 4.0f);
     }
 }
