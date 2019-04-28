@@ -105,12 +105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911143bbbc16dc841ad160bf37df8616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   canon: {fileID: 6539852982027132661}
   bullet: {fileID: -1944712913314341858, guid: 2b9330d99c7e95a45bbf217f689484ee, type: 3}
   shootRate: 100
   bulletVelocity: 35
-  countText: {fileID: 0}
 --- !u!1 &1992466121121687743
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d9d6c92a731e30144a7e28e36f0d78a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
