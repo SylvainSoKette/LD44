@@ -34,21 +34,30 @@ public class PopUpWindowManager : MonoBehaviour
         // No, player can't move ! :D
         playerScript.SetAllowToMove(false);
 
-        float randomX = Random.Range(-1.0f, 1.0f);
-        float randomY = Random.Range(-1.0f, 1.0f);
         if (currentPopUpWindow == null)
         {
             this.currentPopUpWindow = Instantiate(
                 popUpWindow,
-                new Vector3(randomX, randomY, -1),
+                PlaceMeUpScotty(),
                 Quaternion.identity
             );
         }
         else
         {
-            this.currentPopUpWindow.transform.position = new Vector3(randomX, randomY, -1);
+            this.currentPopUpWindow.transform.position = PlaceMeUpScotty();
             this.currentPopUpWindow.SetActive(true);
         }
+    }
+
+    Vector3 PlaceMeUpScotty()
+    {
+        float randomX = Random.Range(-1.0f, 1.0f);
+        float randomY = Random.Range(-1.0f, 1.0f);
+        return new Vector3(
+            player.transform.position.x + randomX,
+            player.transform.position.y + randomY,
+            -1
+        );
     }
 
     void ClickPopUpWindow(bool accept)
