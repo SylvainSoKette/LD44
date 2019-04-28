@@ -231,7 +231,7 @@ Camera:
   far clip plane: 20
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed97d74d10c958f4d8a14138127351a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemy: 100
+  maxEnemy: 50
   enemy: {fileID: 6778889296237881047, guid: affc4cd1a47027d45bb4c32433347cdd, type: 3}
   spawnDistance: 10
   spawnInterval: 1

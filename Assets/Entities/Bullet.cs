@@ -5,8 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public LayerMask collisionMask;
-    public float speed = 10f;
-    public float maxLifeTime = 1.0f;
+    public float speed = 35f;
+    public float maxLifeTime = 3.0f;
 
     public float damage = 3;
 
